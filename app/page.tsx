@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { users } from "./lib/users";
+import GitHubProfileCard from "./components/GithHubProfileCard";
 
 export default function Home() {
   const userCount = users.length;
@@ -122,6 +123,31 @@ export default function Home() {
             </ol>
           </section>
         </div>
+        <section className="mt-12 rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+          <h2 className="text-lg font-semibold">ソースコード（個人学習用）</h2>
+          <p className="mt-3 text-zinc-300">
+            業務用PCでは GitHub の利用を制限しているため、 このリポジトリは{" "}
+            <span className="text-cyan-300">個人学習用</span>{" "}
+            として参照してください。
+          </p>
+
+          <GitHubProfileCard username="kt5rc" />
+
+          <div className="mt-4">
+            <a
+              href="https://github.com/kt5rc/demo-portal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-2xl border border-cyan-700/40 bg-cyan-950/20 px-5 py-3 text-sm font-semibold text-cyan-100 hover:border-cyan-600/60"
+            >
+              https://github.com/kt5rc/demo-portal
+            </a>
+          </div>
+
+          <p className="mt-3 text-sm text-zinc-400">
+            ※ 自宅PCなどで clone して自由に触ってください
+          </p>
+        </section>
       </div>
     </main>
   );
