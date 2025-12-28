@@ -1,65 +1,128 @@
-import Image from "next/image";
+import Link from "next/link";
+import { users } from "./lib/users";
 
 export default function Home() {
+  const userCount = users.length;
+  const roleCount = new Set(users.map((u) => u.role)).size;
+  const skillCount = new Set(users.flatMap((u) => u.skills)).size;
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen bg-zinc-950 text-zinc-100">
+      <div className="mx-auto max-w-4xl px-6 py-16">
+        {/* Hero */}
+        <div className="rounded-3xl border border-zinc-800 bg-zinc-900/40 p-8">
+          <p className="text-sm text-cyan-300">Next.js + Tailwind + Vercel</p>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight">
+            Demo Portal
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-4 max-w-2xl text-zinc-300">
+            外部研修から合流するメンバー向けの「触って理解する」デモ。
+            DBなし（モック）で、ルーティング・コンポーネント・最低限のUIを一通り体験できます。
           </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/users"
+              className="rounded-2xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-zinc-950 hover:bg-cyan-400"
+            >
+              Usersを触る →
+            </Link>
+            <Link
+              href="/about"
+              className="rounded-2xl border border-cyan-700/40 bg-cyan-950/20 px-5 py-3 text-sm font-semibold text-cyan-100 hover:border-cyan-600/60"
+            >
+              About
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Stats */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5">
+            <div className="text-sm text-zinc-400">Users</div>
+            <div className="mt-2 text-2xl font-bold text-cyan-100">
+              {userCount}
+            </div>
+          </div>
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5">
+            <div className="text-sm text-zinc-400">Roles</div>
+            <div className="mt-2 text-2xl font-bold text-cyan-100">
+              {roleCount}
+            </div>
+          </div>
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5">
+            <div className="text-sm text-zinc-400">Unique Skills</div>
+            <div className="mt-2 text-2xl font-bold text-cyan-100">
+              {skillCount}
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+
+        {/* Learn / Steps */}
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          <section className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+            <h2 className="text-lg font-semibold">このデモで学べること</h2>
+            <ul className="mt-4 space-y-2 text-zinc-300">
+              <li>
+                <span className="text-cyan-300">App Router</span>（app/
+                配下の構成）
+              </li>
+              <li>
+                <span className="text-cyan-300">動的ルーティング</span>
+                （/users/[id]）
+              </li>
+              <li>
+                <span className="text-cyan-300">Client Component</span>
+                （検索フィルタ）
+              </li>
+              <li>
+                <span className="text-cyan-300">データ層分離</span>（app/lib）
+              </li>
+              <li>
+                <span className="text-cyan-300">Vercel</span>
+                （GitHub連携デプロイ）
+              </li>
+            </ul>
+          </section>
+
+          <section className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+            <h2 className="text-lg font-semibold">触る順番（おすすめ）</h2>
+            <ol className="mt-4 space-y-3 text-zinc-300">
+              <li>
+                <span className="mr-2 rounded-full border border-cyan-700/40 bg-cyan-950/20 px-2 py-0.5 text-xs text-cyan-100">
+                  Step 1
+                </span>
+                <Link
+                  className="text-cyan-300 hover:text-cyan-200"
+                  href="/users"
+                >
+                  /users
+                </Link>{" "}
+                で一覧を見る
+              </li>
+              <li>
+                <span className="mr-2 rounded-full border border-cyan-700/40 bg-cyan-950/20 px-2 py-0.5 text-xs text-cyan-100">
+                  Step 2
+                </span>
+                検索で絞り込み（Client Component）
+              </li>
+              <li>
+                <span className="mr-2 rounded-full border border-cyan-700/40 bg-cyan-950/20 px-2 py-0.5 text-xs text-cyan-100">
+                  Step 3
+                </span>
+                名前をクリックして詳細へ（/users/[id]）
+              </li>
+              <li>
+                <span className="mr-2 rounded-full border border-cyan-700/40 bg-cyan-950/20 px-2 py-0.5 text-xs text-cyan-100">
+                  Step 4
+                </span>
+                <span className="text-zinc-400">/users/999</span>{" "}
+                で404体験（notFound）
+              </li>
+            </ol>
+          </section>
+        </div>
+      </div>
+    </main>
   );
 }
