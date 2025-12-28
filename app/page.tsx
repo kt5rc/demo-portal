@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import { users } from "./lib/users";
 import GitHubProfileCard from "./components/GithHubProfileCard";
+
+export const metadata: Metadata = {
+  title: "Home",
+};
 
 export default function Home() {
   const userCount = users.length;

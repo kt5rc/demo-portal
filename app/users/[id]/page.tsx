@@ -1,10 +1,20 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import { getUser } from "../../lib/users";
 import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const user = getUser(id);
+  if (!user) return { title: "User Not Found" };
+  return {
+    title: `${user.name} - User Detail`,
+  };
+}
 
 export default async function UserDetailPage({ params }: Props) {
   const { id } = await params;

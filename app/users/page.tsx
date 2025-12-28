@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import { users } from "../lib/users";
 import UsersList from "./UsersList";
+
+export const metadata: Metadata = {
+  title: "Users",
+};
 
 export default function UsersPage() {
   return (
